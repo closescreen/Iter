@@ -66,7 +66,7 @@ Base.done(itr::EMapFil, s) = s[1]==nothing
 mapfilter(f::Function, itr) = EMapFil(f,itr)
 mapfilter(f::Function) = itr->mapfilter(f,itr)
 mapfilter(f1::Function,f2::Function,other...) = mapfilter( (x...)->f1(f2(x...)) , other...)
-
+mapfilter(f::Function, itr::EMapFil) = mapfilter(f, itr.f, itr.i)
 
 
 
