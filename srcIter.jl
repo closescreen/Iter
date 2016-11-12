@@ -1,5 +1,6 @@
 
-module MapFilter
+module Iter
+
 
 """
 [1,2,3] |> map(x->x+1)
@@ -27,14 +28,14 @@ immutable EMapFil{F,I}
     i::I
 end
 
-
-function Base.next(itr::EMapFil, s)
+import Base: next, start, done
+function next(itr::EMapFil, s)
     (rv,si) = s
     si2=advance_itr(itr, si)
     (rv,si2)
 end
 
-function Base.start(itr::EMapFil)
+function start(itr::EMapFil)
     si = start(itr.i)
     advance_itr(itr, si)
 end
@@ -50,7 +51,7 @@ function advance_itr(itr,si)
     (nothing,)
 end
 
-Base.done(itr::EMapFil, s) = s[1]==nothing
+done(itr::EMapFil, s) = s[1]==nothing
 
 
 
